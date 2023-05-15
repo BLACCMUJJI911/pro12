@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(){
+    super()
+
+    this.state = {
+      product: "",
+      retail: "",
+      percentage :"13",
+      total:""
+    }
+
+  }
+
+  inp1_chg = (ret) => {
+   
+    this.setState ({
+      retail :parseInt(ret)
+    })
+  }
+  inp2_chg = (per) => {
+   
+    this.setState ({
+      percentage :parseFloat(per)
+    })
+  }
+  inp_prod = (prod) => {
+  this.setState ({
+    product: prod
+  })
 }
 
-export default App;
+  _total = () => {
+
+  this.inp2_chg - this.inp1_chg
+  
+}
+
+  render(){
+    return(
+      <>
+      <input type="text" placeholder="Enter Products" value={this.state.product} onChange={(e) => this.inp_prod(e.target.value)}/>
+      <input type="text" placeholder="Enter Value" value={this.state.retail} onChange={(e) => this.inp1_chg(e.target.value)}/>
+      <input type="number" placeholder="Enter Percentage" value={this.state.percentage} onChange={(e) => this.inp2_chg(e.target.value)} />
+      {/* <h1 >{this.state.retail}</h1> */}
+      <button onClick={() => this._total()}>Result</button>
+      </>
+    )
+  }
+}
+export default App
